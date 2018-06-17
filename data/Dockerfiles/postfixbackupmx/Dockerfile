@@ -17,12 +17,15 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	syslog-ng-core \
 	supervisor \
 	&& rm -rf /var/lib/apt/lists/* \
-	&& touch /etc/default/locale 
+	&& touch /etc/default/locale \
+        && mkdir /etc/postfix/backupmx
+       
 
 COPY supervisord.conf /etc/supervisor/supervisord.conf
 COPY syslog-ng.conf /etc/syslog-ng/syslog-ng.conf
 COPY fetch_accounts.pl /usr/local/bin/
-COPY postfix.conf /etc/postfix/main.cf
+COPY postfix.main.conf /etc/postfix/main.cf
+COPY postfix.master.conf /etc/postfix/master.cf
 COPY envparser.sh /root/
 
 RUN echo 'MAILTO=""' > /etc/cron.d/fetch_accounts && echo '* * * * *   root   . /root/env.sh; /usr/local/bin/fetch_accounts.pl >/dev/null 2>&1' >> /etc/cron.d/fetch_accounts

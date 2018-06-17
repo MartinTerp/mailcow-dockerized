@@ -5,8 +5,8 @@ use JSON;
 use Data::Dumper;
 
 
-my $relay_domains_file = '/etc/postfix/relay_domains.pcre';
-my $recipient_maps_file = '/etc/postfix/recipient_maps.pcre';
+my $relay_domains_file = '/etc/postfix/backupmx/relay_domains.pcre';
+my $recipient_maps_file = '/etc/postfix/backupmx/recipient_maps.pcre';
 
 my $allUsers = $ENV{'ALLUSERS'} || 0;
 

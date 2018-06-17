@@ -5,6 +5,8 @@ services:
     image: mailcow/postfixbackup
     build: ./data/Dockerfiles/postfixbackupmx
     hostname: mail01.fra1.dots.dk
+    volumes:
+      - postfixbackupmx-vol-1:/etc/postfix/backupmx/
     networks:
       - postnet
     environment:
@@ -14,6 +16,9 @@ services:
       - ALLUSERS=0
     ports:
       - "25:25"
+
+volumes:
+  postfixbackupmx-vol-1:
 
 networks:
   postnet:
