@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  postfix-backupmx:
+    image: mailcow/postfixbackup
+    build: ./data/Dockerfiles/postfixbackupmx
+    hostname: mail01.fra1.dots.dk
+    networks:
+      - postnet
+    environment:
+      - APIHOST=mail.domain.com
+      - APIMETHOD=https
+      - APIKEY=API-KEY
+      - ALLUSERS=0
+    ports:
+      - "25:25"
+
+networks:
+  postnet:
+    driver: bridge
+
